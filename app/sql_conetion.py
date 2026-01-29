@@ -10,7 +10,12 @@ class Sql_connector:
                 database = os.getenv('MYSQL_DATABASE','classicmodels'),
                 use_pure=True
             )
-        self.cursor = self.connection.cursor()
+        self.cursor = self.connection.cursor(dictionary=True)
 
+    def get_info(self, qury):
+        self.cursor.execute(qury) 
+        info = self.cursor.fetchall()
+        self.cursor.close()
+        return info
    
         
